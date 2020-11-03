@@ -1,4 +1,4 @@
-# goal: play a song and print infomation
+# goal: プレイリストデータベースの作成(ファイルパスとしてではなく，曲として列挙する目的であればOK)
 
 import time, vlc
 from mutagen.easyid3 import EasyID3
@@ -47,6 +47,10 @@ def playMusic(source):
     print("Duration: " + str(durationSec) + " [sec]")
 
 args = sys.argv
-filename = args[1]
-printInfo(filename)
-playMusic(filename)
+playlistfile = open(args[1], 'r')
+songs = playlistfile.readlines()
+#filename = args[1]
+for song in songs:
+    print(song.strip())
+    printInfo(song.strip())
+    playMusic(song.strip())
